@@ -19,8 +19,7 @@ function Stats() {
             key={index}
             className="flex-1 flex gap-4 items-center justify-center xl:justify-start"
             
-            // ANIMATION
-            initial={{ opacity: 0, y: 80 }} // bigger offset to ensure proper animation on large screens
+            initial={{ opacity: 0, y: 80 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{
               duration: 0.8,
@@ -28,8 +27,8 @@ function Stats() {
               ease: "easeOut",
             }}
 
-            // FIX: Ensures animation triggers on large screens
-            viewport={{ once: true, margin: "-150px" }}
+            // FIXED: triggers animation reliably on multi-row layouts
+            viewport={{ once: true, amount: 0.3 }}
           >
             <span>
               <CountUp
@@ -40,11 +39,7 @@ function Stats() {
               />
             </span>
 
-            <p
-              className={`${
-                item.text.length < 15 ? "max-w-[100px]" : "max-w-[150px]"
-              }`}
-            >
+            <p className={`${item.text.length < 15 ? "max-w-[100px]" : "max-w-[150px]"}`}>
               {item.text}
             </p>
           </motion.div>
