@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { motion } from "framer-motion";
 import { FaHeart, FaStar, FaFire, FaCommentDots, FaInfinity } from "react-icons/fa";
 
@@ -43,13 +43,13 @@ export default function LoveTimeline() {
       </h2>
 
       <div className="relative">
-        {/* Vertical Line (center on lg, left on mobile) */}
-        <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 bg-pink-500/40 top-0 bottom-0"></div>
-        <div className="lg:hidden absolute left-4 w-1 bg-pink-500/40 top-0 bottom-0"></div>
+
+        {/* Vertical Line (only on large screens) */}
+        <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 bg-pink-500/40 top-0 bottom-0" />
 
         {timeline.map((item, index) => {
           const Icon = item.icon;
-          const isLeft = index % 2 === 0; // even index on left, odd on right
+          const isLeft = index % 2 === 0;
 
           return (
             <motion.div
@@ -59,16 +59,23 @@ export default function LoveTimeline() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
               className={`
-                mb-16 flex items-center
+                mb-16 flex flex-col lg:flex-row items-center relative
                 ${isLeft ? "lg:justify-start" : "lg:justify-end"}
               `}
             >
-              {/* TIMELINE DOT */}
+
+              {/* MOBILE ICON (Top centered) */}
+              <div className="lg:hidden mb-4">
+                <div className="bg-pink-500 p-3 rounded-full shadow-lg shadow-pink-500/30">
+                  <Icon className="text-white" size={20} />
+                </div>
+              </div>
+
+              {/* DESKTOP ICON (centered on line) */}
               <div
                 className={`
-                  absolute 
-                  ${isLeft ? "lg:left-[calc(50%-6px)]" : "lg:left-[calc(50%-6px)]"}
-                  left-3
+                  hidden lg:block absolute
+                  lg:left-[calc(50%-10px)]
                 `}
               >
                 <div className="bg-pink-500 p-2 rounded-full shadow-lg shadow-pink-500/20">
@@ -79,7 +86,8 @@ export default function LoveTimeline() {
               {/* CARD */}
               <div
                 className={`
-                  bg-[#1a1a1f] border border-pink-500/20 p-6 rounded-xl w-full lg:w-[45%]
+                  bg-[#1a1a1f] border border-pink-500/20 shadow-md shadow-pink-500/20 
+                  p-6 rounded-xl w-full lg:w-[45%]
                   ${isLeft ? "lg:ml-0 lg:mr-auto" : "lg:mr-0 lg:ml-auto"}
                 `}
               >
@@ -87,6 +95,7 @@ export default function LoveTimeline() {
                 <h4 className="text-white font-bold text-xl">{item.title}</h4>
                 <p className="text-gray-300">{item.desc}</p>
               </div>
+
             </motion.div>
           );
         })}
