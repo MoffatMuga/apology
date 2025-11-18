@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import { motion } from "framer-motion";
 import { FaHeart, FaStar, FaFire, FaCommentDots, FaInfinity } from "react-icons/fa";
 

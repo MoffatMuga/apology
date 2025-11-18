@@ -5,6 +5,9 @@ import { FaPlay, FaPause } from "react-icons/fa"
 import { useState, useRef } from "react"
 import Photo from "@/components/ui/Photo"
 import Stats from "@/components/ui/Stats"
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+import { useEffect } from 'react';
 
 
 function Page() {
@@ -22,13 +25,18 @@ function Page() {
       setIsPlaying(true)
     }
   }
-
+ useEffect(() => {
+    AOS.init({
+      duration: 1000, 
+      once: true,    
+    });
+  }, []);
   return (
     <section className="h-full">
       <div className="container mx-auto h-full">
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-0 xl:pb-4">
 
-          <div className="flex flex-col text-center xl:text-left order-2 xl:order-none mt-8 xl:mt-0">
+          <div data-aos="fade-right" className="flex flex-col text-center xl:text-left order-2 xl:order-none mt-8 xl:mt-0">
             <span>To the One Who Commands My Days ..</span>
             <h1 className="font-semibold text-[30px] xl:text-[45px] leading-[1.1] mt-2">
               How else could I <br />
@@ -64,14 +72,14 @@ function Page() {
             <audio ref={audioRef} src="/music/apology-song.mp3"></audio>
           </div>
 
-          <div>
+          <div data-aos="fade-left">
             <Photo className="order-1 flex justify-center xl:order-none mb-12 xl:mb-0" />
           </div>
 
         </div>
       </div>
 
-      <Stats />
+      <Stats  />
     </section>
   )
 }

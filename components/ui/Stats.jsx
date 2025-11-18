@@ -1,5 +1,7 @@
 "use client";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+import { useEffect } from 'react';
 import CountUp from 'react-countup'
 
 const stats = [
@@ -19,9 +21,16 @@ const stats = [
     
 ]
 function Stats() {
+      useEffect(() => {
+    AOS.init({
+      duration: 1000, 
+      once: true,     
+    });
+  }, []);
+
   return (
-    <section className='pt-4 pb-4 xl:pt-0 xl:pb-0'>
-        <div className="">
+    <section  className='pt-4 pb-4 xl:pt-0 xl:pb-0'>
+        <div data-aos="flip-up" className="">
             <div className='flex flex-wrap flex-col md:flex-row gap-6 xl:max-w-none justify-center '>
                 {stats.map((item, index) => {
                     return <div key={index} className='flex-1 flex gap-4 items-center justify-center xl:justify-start '>
